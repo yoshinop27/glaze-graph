@@ -9,6 +9,7 @@ friendGroup = {
         "Kai": ["Carlos", "Colson", "Justice", "Luke"],
         "Colin": ["Colson", "Justice", "Nasir", "Nate"],
         "Nate": ["Preston", "Colson", "Justice"],
+        "Preston":["Nasir", "Justice"]
     }
 
 class glazeGraph:
@@ -34,8 +35,22 @@ class glazeGraph:
                 self.graph[glazer].append(name)
             print(f"{glazer} is now a glazer of {name}")
 
+    def deleteGlazee(self, name, glazee):
+        if name not in self.graph.keys():
+            print(f"{name} not in friend group")
+            return
+        elif glazee not in self.graph[name]:
+            print(f"{name} never glazed {glazee}")
+            return
+        self.graph[name].remove(glazee)
+
+    def __str__(self):
+        return '\n'.join(f"{k} glazes {v}" for k, v in self.graph.items())
+
 def main():
     scars = glazeGraph(friendGroup)
-    scars.add("Kaili", ["Preston", "Nasir", "Colson", "Luke"], ["Nasir", "Brennan", "Kai"])
-
+    #scars.add("Kaili", ["Preston", "Nasir", "Colson", "Luke"], ["Nasir", "Brennan", "Kai"])
+    #scars.add("Chris", ["Nasir", "Preston", "Justice", "Colin", "Nate"], ["Nasir"])
+    scars.deleteGlazee("Preston", "Nasir")
+    print(scars)
 main()
